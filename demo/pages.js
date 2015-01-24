@@ -13,6 +13,14 @@ SimpleViews.registerInitializer('home', function() {
 });
 
 
+SimpleViews.registerInitializer('metoo', function() {
+    this.addEventListener('click',
+        function() {
+            alert('You clicked metoo button!');
+        });
+});
+
+
 SimpleViews.registerInitializer('home-jquery', function() {
     $('#clickme').on('click', function() {
         alert('You did click the jQuery button!');

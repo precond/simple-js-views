@@ -16,6 +16,12 @@
         // Empty for now
     }
 
+    function executeInitializer(element) {
+        var initname = element.getAttribute('data-sv-init');
+        if (initname && initializers[initname] && initializers[initname].initfunc) {
+            initializers[initname].initfunc.call(element);
+        }
+    }
     
     /* Registers an init function */
     SimpleViews.registerInitializer = function(name, initfunc) {
@@ -31,11 +37,18 @@
             oldWindowLoad();
         }
 
+        // Always execute the <body> initializer first, if found
         var body = document.getElementsByTagName('body')[0];
         if (body) {
-            var initname = body.getAttribute('data-sv-init');
-            if (initname && initializers[initname] && initializers[initname].initfunc) {
-                initializers[initname].initfunc.call(body);
+            executeInitializer(body);
+        }
+        
+        // Then check all elements that have the magic class
+        var elements = document.getElementsByClassName('sv-init');
+        for (var i=0; i<elements.length; i++) {
+            // Make sure not to execute body initializer twice, if it happens to have the magic class
+            if (elements[i].nodeName != 'BODY') {
+                executeInitializer(elements[i]);
             }
         }
     };

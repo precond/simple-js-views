@@ -16,7 +16,7 @@ Currently it has only page initialization hooks, but in the future it might evol
 more sophisticated, providing helpers for some common patterns in general plumbing of a page.
 
 
-## Usage Example
+## Usage Example: Basic
 For this HTML page:
 
 ```html
@@ -50,6 +50,55 @@ The key is the `data-sv-init` attribute in the `<body>` element, which binds an 
 the page. The role of the library is to look up this attribute on page load and execute the init function
 if it is found (the init function receives the `body` element as `this`). There is no need to write any
 inline javascript on the page, just load your script files in the bottom of the page as usual.
+
+
+## Usage Example: Initializer on any element
+The above example is simple enough for a page, which needs only one initializer function (and in practise is
+little more than a glorified `<body onload="doMyStuff()">`). However, often when you render pages from
+server-side nested templates, you tend to have more than one initializer: one for the base template, one for
+an intermediate derived from the base and one for the actual page. In this case it is handy to be able to add
+an initializer to any element on the page, not just `<body>`. For example:
+
+```html
+<html>
+  <head>
+    <title>Simple JS views sample</title>
+  </head>
+  <body data-sv-init="home">
+    <h1>This is a sample page</h1>
+    <p><button id="clickme">Click me</button><p>
+    <p><button class="sv-init" data-sv-init="metoo">Click me, too</button></p>
+
+    <script src="js/simple-js-views.js"></script>
+    <script src="js/pages.js"></script>
+  </body>
+</html>
+```
+
+You can have two initializers (in `pages.js`):
+
+```javascript
+SimpleViews.registerInitializer('home', function() {
+    var button = document.getElementById('clickme');
+    button.addEventListener('click',
+        function() {
+            alert('You did click me!');
+        });
+});
+
+SimpleViews.registerInitializer('metoo', function() {
+    // Note that "this" is the element on which the initializer was added
+    this.addEventListener('click',
+        function() {
+            alert('You clicked metoo button!');
+        });
+});
+```
+
+The trick is to add a magic `class="sv-init"` to the element in addition to the `data-sv-init` attribute.
+(This is strictly for efficiency so that the library does not have to walk through the whole DOM to find
+the initializer data attributes.) The initializer functions are executed in the order in which they appear
+on the page; `<body>` initializer always first, however.
 
 
 ## Design goals
