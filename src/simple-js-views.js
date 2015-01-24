@@ -33,7 +33,7 @@
 
         var body = document.getElementsByTagName('body')[0];
         if (body) {
-            var pagename = body.getAttribute('simple-page-name');
+            var pagename = body.getAttribute('data-sv-page-name');
             if (pagename && pages[pagename] && pages[pagename].initfunc) {
                 pages[pagename].initfunc();
             }

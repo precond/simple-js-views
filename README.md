@@ -24,7 +24,7 @@ For this HTML page:
   <head>
     <title>Simple JS views sample</title>
   </head>
-  <body simple-page-name="home">
+  <body data-sv-page-name="home">
     <h1>This is a sample page</h1>
     <button id="clickme">Click me</button>
 
@@ -46,7 +46,7 @@ SimpleViews.page('home', function() {
 });
 ```
 
-The key is the "simple-page-name" attribute in the `<body>` element, which binds the page initialization
+The key is the `data-sv-page-name` attribute in the `<body>` element, which binds the page initialization
 function to the page. The role of the framework is to look up this attribute on page load and execute
 the init function if it is found.
 
