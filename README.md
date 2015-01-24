@@ -48,7 +48,7 @@ SimpleViews.page('home', function() {
 
 The key is the `data-sv-page-name` attribute in the `<body>` element, which binds the page initialization
 function to the page. The role of the framework is to look up this attribute on page load and execute
-the init function if it is found.
+the init function if it is found. The init function receives the `body` element as `this`.
 
 
 ## Design goals

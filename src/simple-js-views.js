@@ -35,7 +35,7 @@
         if (body) {
             var pagename = body.getAttribute('data-sv-page-name');
             if (pagename && pages[pagename] && pages[pagename].initfunc) {
-                pages[pagename].initfunc();
+                pages[pagename].initfunc.call(body);
             }
         }
     };

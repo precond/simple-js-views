@@ -5,9 +5,10 @@
 
 SimpleViews.page('home', function() {
     var button = document.getElementById('clickme');
+    var pagename = this.getAttribute('data-sv-page-name');
     button.addEventListener('click',
         function() {
-            alert('You did click me!');
+            alert('You did click me on page "' + pagename + '"');
         });
 });
 
