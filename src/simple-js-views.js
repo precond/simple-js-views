@@ -1,6 +1,9 @@
-/**
- * Created by juhana on 1/24/15.
- */
+/*!
+ simple-js-views
+ Version 0.0.1
+ Copyright © 2015 Juhana Räsänen
+ Licensed under the MIT license.
+*/
 
 
 (function() {

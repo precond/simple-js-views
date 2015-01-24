@@ -1,0 +1,21 @@
+{
+  "name": "simple-js-views",
+  "version": "0.0.1",
+  "author": "Juhana Räsänen <juhana.rasanen@precond.com>",
+  "description": "A simple and to-the-point utility for organizing and loading page-specific Javascript client code",
+  "main": "Gruntfile.js",
+  "dependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-clean": "~0.6.0",
+    "grunt-contrib-uglify": "~0.7.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/precond/simple-js-views.git"
+  },
+  "bugs": {
+    "url": "https://github.com/precond/simple-js-views/issues"
+  },
+  "homepage": "https://github.com/precond/simple-js-views"
+}
