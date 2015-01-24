@@ -12,8 +12,8 @@ some other framework. However, if you write apps where pages are mostly construc
 still contain some intra-page dynamic functionality, ajax etc, this might be just for you.
 
 The philosophy is to work from the simplest principles, and this library represents that in frontend coding.
-Currently it has only page code initialization hook, but in the future it might evolve into something slightly
-more sophisticated, providing helpers for some common patterns in event handling within a page.
+Currently it has only page initialization hooks, but in the future it might evolve into something slightly
+more sophisticated, providing helpers for some common patterns in general plumbing of a page.
 
 
 ## Usage Example
@@ -24,20 +24,20 @@ For this HTML page:
   <head>
     <title>Simple JS views sample</title>
   </head>
-  <body data-sv-page-name="home">
+  <body data-sv-init="home">
     <h1>This is a sample page</h1>
     <button id="clickme">Click me</button>
 
     <script src="js/simple-js-views.js"></script>
-    <script src="js/pages-concatenated.js"></script>
+    <script src="js/pages.js"></script>
   </body>
 </html>
 ```
 
-You might have the following JS file:
+You might have the following code (in `pages.js`):
 
 ```javascript
-SimpleViews.page('home', function() {
+SimpleViews.registerInitializer('home', function() {
     var button = document.getElementById('clickme');
     button.addEventListener('click',
         function() {
@@ -46,14 +46,15 @@ SimpleViews.page('home', function() {
 });
 ```
 
-The key is the `data-sv-page-name` attribute in the `<body>` element, which binds the page initialization
-function to the page. The role of the framework is to look up this attribute on page load and execute
-the init function if it is found. The init function receives the `body` element as `this`.
+The key is the `data-sv-init` attribute in the `<body>` element, which binds an initialization function to
+the page. The role of the library is to look up this attribute on page load and execute the init function
+if it is found (the init function receives the `body` element as `this`). There is no need to write any
+inline javascript on the page, just load your script files in the bottom of the page as usual.
 
 
 ## Design goals
-* Server-side framework agnostic; works on any HTML page
-* Client-side framework agnostic; specifically does not require jQuery, but does not exclude it either
+* Server-side framework agnostic; works on any HTML page generated in any server environment
+* Client-side framework agnostic; specifically does not require jQuery (but does not exclude it, of course)
 * Makes it possible to easily write page-specific Javascript code in organized manner
 * Makes it possible to hook to that page-specific code non-intrusively in the HTML code
 * Keep it simple for pages for which simple is sufficient

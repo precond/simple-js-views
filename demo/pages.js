@@ -3,9 +3,9 @@
  */
 
 
-SimpleViews.page('home', function() {
+SimpleViews.registerInitializer('home', function() {
     var button = document.getElementById('clickme');
-    var pagename = this.getAttribute('data-sv-page-name');
+    var pagename = this.getAttribute('data-sv-init');
     button.addEventListener('click',
         function() {
             alert('You did click me on page "' + pagename + '"');
@@ -13,7 +13,7 @@ SimpleViews.page('home', function() {
 });
 
 
-SimpleViews.page('home-jquery', function() {
+SimpleViews.registerInitializer('home-jquery', function() {
     $('#clickme').on('click', function() {
         alert('You did click the jQuery button!');
     });

@@ -10,22 +10,22 @@
     'use strict';
 
     var oldWindowLoad = window.onload;
-    var pages = {};
+    var initializers = {};
 
     function SimpleViews() {
         // Empty for now
     }
 
     
-    /* Registers a page and its init function */
-    SimpleViews.page = function(name, initfunc) {
-        pages[name] = {
+    /* Registers an init function */
+    SimpleViews.registerInitializer = function(name, initfunc) {
+        initializers[name] = {
             initfunc: initfunc
         };
     };
 
     
-    /* When page loads, run its init function if found */
+    /* When page loads, run the init functions found on page */
     window.onload = function() {
         if (oldWindowLoad) {
             oldWindowLoad();
@@ -33,9 +33,9 @@
 
         var body = document.getElementsByTagName('body')[0];
         if (body) {
-            var pagename = body.getAttribute('data-sv-page-name');
-            if (pagename && pages[pagename] && pages[pagename].initfunc) {
-                pages[pagename].initfunc.call(body);
+            var initname = body.getAttribute('data-sv-init');
+            if (initname && initializers[initname] && initializers[initname].initfunc) {
+                initializers[initname].initfunc.call(body);
             }
         }
     };
