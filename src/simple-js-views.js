@@ -1,6 +1,6 @@
 /*!
  simple-js-views
- Version 0.0.1
+ Version 0.0.2
  Copyright © 2015 Juhana Räsänen
  Licensed under the MIT license.
 */

@@ -1,6 +1,6 @@
 {
   "name": "simple-js-views",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Juhana Räsänen <juhana.rasanen@precond.com>",
   "description": "A simple and to-the-point utility for organizing and loading page-specific Javascript client code",
   "main": "Gruntfile.js",
