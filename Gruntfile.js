@@ -3,6 +3,14 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
+    copy: {
+      dist: {
+        files: [
+          {expand: true, cwd: 'src/', src: ['simple-js-views.js'], dest: 'dist/'}
+        ]
+      }
+    },
+
     uglify: {
       options: {
         preserveComments: 'some'
@@ -21,8 +29,9 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
-  grunt.registerTask('dist', ['clean:dist', 'uglify:dist']);
+  grunt.registerTask('dist', ['clean:dist', 'copy:dist', 'uglify:dist']);
 
 };
