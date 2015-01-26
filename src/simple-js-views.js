@@ -19,7 +19,15 @@
     function executeInitializer(element) {
         var initname = element.getAttribute('data-sv-init');
         if (initname && initializers[initname] && initializers[initname].initfunc) {
-            initializers[initname].initfunc.call(element);
+            var args = {};
+            for (var i=0; i<element.attributes.length; i++) {
+                var a = element.attributes[i];
+                if (a.name.toLowerCase().indexOf('data-sv-arg-') == 0) {
+                    var name = a.name.toLowerCase().substr(12);
+                    args[name] = a.value;
+                }
+            }
+            initializers[initname].initfunc.call(element, args);
         }
     }
     

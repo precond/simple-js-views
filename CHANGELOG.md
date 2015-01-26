@@ -4,6 +4,7 @@
 * Use `data-` naming in attributes passed
 * Pass the DOM element as `this` to the init function
 * An init function and be defined on any element
+* Arguments can be passed to init functions via HTML element attributes
 
 
 ## v0.0.1 -- 24 Jan 2015

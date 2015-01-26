@@ -3,12 +3,12 @@
  */
 
 
-SimpleViews.registerInitializer('home', function() {
+SimpleViews.registerInitializer('home', function(args) {
     var button = document.getElementById('clickme');
     var pagename = this.getAttribute('data-sv-init');
     button.addEventListener('click',
         function() {
-            alert('You did click me on page "' + pagename + '"');
+            alert('You clicked me on page "' + pagename + '" with message "' + args.msg + '"');
         });
 });
 

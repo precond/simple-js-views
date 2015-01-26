@@ -101,6 +101,44 @@ the initializer data attributes.) The initializer functions are executed in the 
 on the page; `<body>` initializer always first, however.
 
 
+## Usage Example: Passing arguments
+When pages are rendered from server-side templates, it is sometimes necessary to pass template variables as
+arguments to javascript function. This often results in an awkward mix of javascript and template syntax, for
+example `setupUserPanel({{ user.id }});`. Simple views library allows passing arguments to init functions from
+HTML element attributes, whose name is prepended with `data-sv-arg-`, for example:
+
+```html
+<html>
+  <head>
+    <title>Simple JS views sample</title>
+  </head>
+  <body data-sv-init="home", data-sv-srg-msg="Hello!">
+    <h1>This is a sample page</h1>
+    <button id="clickme">Click me</button>
+
+    <script src="js/simple-js-views.js"></script>
+    <script src="js/pages.js"></script>
+  </body>
+</html>
+```
+
+The init function receives the arguments in an object passed as the first function argument (`data-sv-arg-`
+prefix is stripped from the argument names):
+
+```javascript
+SimpleViews.registerInitializer('home', function(args) {
+    var button = document.getElementById('clickme');
+    button.addEventListener('click',
+        function() {
+            alert('You clicked me with message: ' + args.msg);
+        });
+});
+```
+
+The arguments would naturally be accessible directly from `this` element: `var msg = this.getAttribute('data-sv-init-msg');`,
+but having them in a pre-parsed object makes the init function code slightly more concise.
+
+
 ## Design goals
 * Server-side framework agnostic; works on any HTML page generated in any server environment
 * Client-side framework agnostic; specifically does not require jQuery (but does not exclude it, of course)
