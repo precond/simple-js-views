@@ -112,7 +112,7 @@ HTML element attributes, whose name is prepended with `data-sv-arg-`, for exampl
   <head>
     <title>Simple JS views sample</title>
   </head>
-  <body data-sv-init="home", data-sv-srg-msg="Hello!">
+  <body data-sv-init="home", data-sv-arg-msg="Hello!">
     <h1>This is a sample page</h1>
     <button id="clickme">Click me</button>
 
