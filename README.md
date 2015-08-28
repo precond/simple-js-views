@@ -11,10 +11,6 @@ so if you are looking for those and/or writing a real single page application, y
 some other framework. However, if you write apps where pages are mostly constructed on the server side, but
 still contain some intra-page dynamic functionality, ajax etc, this might be just for you.
 
-The philosophy is to work from the simplest principles, and this library represents that in frontend coding.
-Currently it has only page initialization hooks, but in the future it might evolve into something slightly
-more sophisticated, providing helpers for some common patterns in general plumbing of a page.
-
 
 ## Usage Example: Basic
 For this HTML page:
@@ -139,10 +135,32 @@ The arguments would naturally be accessible directly from `this` element: `var m
 but having them in a pre-parsed object makes the init function code slightly more concise.
 
 
+## Usage Example: Invoke initializers manually
+If your page loads HTML content dynamically for example via ajax calls, you might want to execute the
+initializers on the newly loaded elements. SimpleViews provides a function for running the initializer
+of given element (identified by its ID), so you could hook that to your ajax calls, for example:
+
+```javascript
+SimpleViews.registerInitializer('snippet', function(args) {
+    do_my_thing();
+});
+
+$.ajax({
+    url: '/load/',
+    type: 'GET',
+    dataType: 'html',
+    success: function (data, status) {
+        $('#dynamic_content').html(data);
+        SimpleViews.executeInitializer('dynamic_snippet');
+    }
+});
+```
+
+
 ## Design goals
 * Server-side framework agnostic; works on any HTML page generated in any server environment
 * Client-side framework agnostic; specifically does not require jQuery (but does not exclude it, of course)
-* Makes it possible to easily write page-specific Javascript code in organized manner
+* Makes it possible to easily write page-specific Javascript code in an organized way
 * Makes it possible to hook to that page-specific code non-intrusively in the HTML code
 * Keep it simple for pages for which simple is sufficient
-* Keep inline javascript out of HTML
+* Get rid of inline javascript in HTML

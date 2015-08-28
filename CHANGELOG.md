@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.1.1 -- 28 Aug 2015
+* Add helper function to execute initializer on given element, for example after an ajax call completes.
+
+
 ## v0.1.0 -- 26 Jan 2015
 * Use `data-` naming in attributes passed
 * Pass the DOM element as `this` to the init function

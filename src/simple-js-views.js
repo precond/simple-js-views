@@ -1,6 +1,6 @@
 /*!
  simple-js-views
- Version 0.1.0
+ Version 0.1.1
  Copyright © 2015 Juhana Räsänen
  Licensed under the MIT license.
 */
@@ -42,6 +42,13 @@
         initializers[name] = {
             initfunc: initfunc
         };
+    };
+
+
+    /* Executes the init function on given element. */
+    SimpleViews.executeInitializer = function(element_id) {
+        var element = document.getElementById(element_id);
+        executeInitializer(element);
     };
 
     
