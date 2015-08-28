@@ -138,7 +138,15 @@ but having them in a pre-parsed object makes the init function code slightly mor
 ## Usage Example: Invoke initializers manually
 If your page loads HTML content dynamically for example via ajax calls, you might want to execute the
 initializers on the newly loaded elements. SimpleViews provides a function for running the initializer
-of given element (identified by its ID), so you could hook that to your ajax calls, for example:
+of given element (identified by its ID), so you could hook that to your ajax calls, see example below.
+(The example assumes jQuery and it demonstrates loading an HTML snippet into element with ID "dynamic_content".)
+
+```html
+  <div id="dynamic_snippet" data-sv-init="snippet">
+    <h1>This is a sample snippet</h1>
+    ...
+  </div>
+```
 
 ```javascript
 SimpleViews.registerInitializer('snippet', function(args) {
@@ -146,7 +154,7 @@ SimpleViews.registerInitializer('snippet', function(args) {
 });
 
 $.ajax({
-    url: '/load/',
+    url: 'snippet.html',
     type: 'GET',
     dataType: 'html',
     success: function (data, status) {

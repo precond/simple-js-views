@@ -23,6 +23,24 @@ SimpleViews.registerInitializer('metoo', function() {
 
 SimpleViews.registerInitializer('home-jquery', function() {
     $('#clickme').on('click', function() {
-        alert('You did click the jQuery button!');
+        alert('You clicked the jQuery button!');
+    });
+    $('#load_dynamic').on('click', function() {
+        $.ajax({
+            url: 'snippet.html',
+            type: 'GET',
+            dataType: 'html',
+            success: function (data, status) {
+                $('#dynamic_content').html(data);
+                SimpleViews.executeInitializer('dynamic_snippet');
+            }
+        });
+    });
+});
+
+
+SimpleViews.registerInitializer('snippet', function() {
+    $('#dynamic').on('click', function() {
+        alert('You clicked the dynamically loaded button!');
     });
 });
